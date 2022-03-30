@@ -43,7 +43,7 @@ locals {
 
       # Don't deploy an in-cluster Grafana
       grafana = {
-        enabled = true
+        enabled = false
       }
 
       # Disable monitoring of resources managed by cloud (EKS, AKS, etc)
