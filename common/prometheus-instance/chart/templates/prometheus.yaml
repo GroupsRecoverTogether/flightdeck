@@ -42,8 +42,8 @@ spec:
   evaluationInterval: {{ . }}
   {{- end }}
   {{- with .Values.prometheus.spec.resources }}
-    resources:
-      {{ toYaml .Values.prometheus.spec.resources | indent 4 }}
+  resources:
+    {{ toYaml . | indent 4 | trim }}
   {{- end }}
   retention: {{ .Values.prometheus.spec.retention | quote  }}
   {{- with .Values.prometheus.spec.retentionSize }}

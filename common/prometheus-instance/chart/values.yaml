@@ -7,6 +7,7 @@ destination:
 prometheus:
   annotations: {}
   spec:
+    resources: {}
     alertmanagers:
     - apiVersion: v2
       name: kube-prometheus-stack-alertmanager
