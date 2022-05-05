@@ -129,6 +129,7 @@ module "flightdeck_prometheus" {
 }
 
 module "federated_prometheus" {
+  count  = var.federated_prometheus_enabled ? 1 : 0
   source = "../../common/prometheus-instance"
 
   chart_values  = local.federated_prometheus_values
@@ -156,6 +157,7 @@ module "metrics_server" {
 }
 
 module "vertical_pod_autoscaler" {
+  count  = var.vpa_enabled ? 1 : 0
   source = "../../common/vertical-pod-autoscaler"
 
   chart_values  = var.vertical_pod_autoscaler_values
