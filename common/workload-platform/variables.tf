@@ -64,6 +64,12 @@ variable "flightdeck_namespace" {
   description = "Kubernetes namespace in which flightdeck should be installed"
 }
 
+variable "federated_prometheus_enabled" {
+  description = "Set to false to disable the Helm chart"
+  type        = bool
+  default     = true
+}
+
 variable "federated_prometheus_values" {
   description = "Overrides to pass to the Helm chart"
   type        = list(string)
@@ -200,6 +206,12 @@ variable "secret_store_driver_version" {
   type        = string
   description = "Version of the secret store driver to install"
   default     = null
+}
+
+variable "vpa_enabled" {
+  description = "Set to false to disable the Helm chart"
+  type        = bool
+  default     = true
 }
 
 variable "vertical_pod_autoscaler_values" {
