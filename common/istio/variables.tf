@@ -7,7 +7,7 @@ variable "base_chart_name" {
 variable "base_chart_repository" {
   type        = string
   description = "Helm repository containing the Istio base chart"
-  default     = "https://flightdeck-charts.s3.amazonaws.com/istio"
+  default     = "https://istio-release.storage.googleapis.com/charts"
 }
 
 variable "base_chart_values" {
@@ -25,7 +25,7 @@ variable "discovery_chart_name" {
 variable "discovery_chart_repository" {
   type        = string
   description = "Helm repository containing the Istio discovery chart"
-  default     = "https://flightdeck-charts.s3.amazonaws.com/istio"
+  default     = "https://istio-release.storage.googleapis.com/charts"
 }
 
 variable "discovery_chart_values" {

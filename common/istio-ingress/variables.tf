@@ -1,7 +1,7 @@
 variable "chart_name" {
   type        = string
   description = "Helm chart to install"
-  default     = "istio-ingressgateway"
+  default     = "istio/gateway"
 }
 
 variable "chart_repository" {
