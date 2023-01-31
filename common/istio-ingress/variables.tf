@@ -1,13 +1,13 @@
 variable "chart_name" {
   type        = string
   description = "Helm chart to install"
-  default     = "istio-ingress"
+  default     = "istio-ingressgateway"
 }
 
 variable "chart_repository" {
   type        = string
   description = "Helm repository containing the chart"
-  default     = "https://flightdeck-charts.s3.amazonaws.com/istio"
+  default     = "https://istio-release.storage.googleapis.com/charts"
 }
 
 variable "chart_values" {
