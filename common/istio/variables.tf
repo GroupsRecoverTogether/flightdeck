@@ -19,7 +19,7 @@ variable "base_chart_values" {
 variable "discovery_chart_name" {
   type        = string
   description = "Name of the Istio discovery chart"
-  default     = "istio/istiod"
+  default     = "istiod"
 }
 
 variable "discovery_chart_repository" {
