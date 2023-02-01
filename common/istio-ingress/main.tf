@@ -9,8 +9,6 @@ resource "helm_release" "istio_ingress" {
 
 
 locals {
-  chart_defaults = jsondecode(file("${path.module}/chart.json"))
-
   chart_values = [
     yamlencode({
       name = "flightdeck-ingressgateway"
