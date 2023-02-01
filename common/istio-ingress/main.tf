@@ -7,22 +7,13 @@ resource "helm_release" "istio_ingress" {
   version    = var.istio_version
 }
 
+
 locals {
+  chart_defaults = jsondecode(file("${path.module}/chart.json"))
+
   chart_values = [
     yamlencode({
-      gateways = {
-        istio-ingressgateway = {
-          autoscaleMin = 3
-          name         = "flightdeck-ingressgateway"
-
-          labels = {
-            istio = "flightdeck"
-          }
-        }
-      }
-      global = {
-        istioNamespace = var.istio_namespace
-      }
+      name = "flightdeck-ingressgateway"
     })
   ]
 }
