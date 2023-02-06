@@ -17,7 +17,7 @@ locals {
         priorityClassName = "system-node-critical"
       }
 
-      enableSecretRotation = true
+      enableSecretRotation = false
       syncSecret = {
         enabled = true
       }
