@@ -114,7 +114,6 @@ module "prometheus_adapter" {
   k8s_namespace = kubernetes_namespace.kube_prometheus_stack[0].metadata[0].name
 
   chart_values = concat(
-    local.prometheus_adapter_values,
     var.prometheus_adapter_values
   )
 
@@ -190,13 +189,4 @@ locals {
     [file("${path.module}/flightdeck-prometheus.yaml")],
     var.flightdeck_prometheus_values
   )
-
-  prometheus_adapter_values = [
-    yamlencode({
-      prometheus = {
-        port = 9090
-        url  = "http://flightdeck-prometheus.${kubernetes_namespace.kube_prometheus_stack[0].metadata[0].name}.svc"
-      }
-    })
-  ]
 }
