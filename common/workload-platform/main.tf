@@ -82,6 +82,7 @@ module "istio_ingress" {
 }
 
 resource "kubernetes_namespace" "kube_prometheus_stack" {
+  count  = var.prometheus_enabled ? 1 : 0
   metadata {
     name = "kube-prometheus-stack"
 
@@ -94,21 +95,23 @@ resource "kubernetes_namespace" "kube_prometheus_stack" {
 }
 
 module "prometheus_operator" {
+  count  = var.prometheus_enabled ? 1 : 0
   source = "../../common/prometheus-operator"
 
   chart_values          = var.prometheus_operator_values
   chart_version         = var.prometheus_operator_version
-  k8s_namespace         = local.kube_prometheus_stack_namespace
+  k8s_namespace         = kubernetes_namespace.kube_prometheus_stack[0].metadata[0].name
   pagerduty_routing_key = var.pagerduty_routing_key
 
   depends_on = [module.cert_manager]
 }
 
 module "prometheus_adapter" {
+  count  = var.prometheus_enabled ? 1 : 0
   source = "../../common/prometheus-adapter"
 
   chart_version = var.prometheus_adapter_version
-  k8s_namespace = local.kube_prometheus_stack_namespace
+  k8s_namespace = kubernetes_namespace.kube_prometheus_stack[0].metadata[0].name
 
   chart_values = concat(
     local.prometheus_adapter_values,
@@ -119,21 +122,22 @@ module "prometheus_adapter" {
 }
 
 module "flightdeck_prometheus" {
+  count  = var.prometheus_enabled ? 1 : 0
   source = "../../common/prometheus-instance"
 
   chart_values  = local.flightdeck_prometheus_values
-  k8s_namespace = local.kube_prometheus_stack_namespace
+  k8s_namespace = kubernetes_namespace.kube_prometheus_stack[0].metadata[0].name
   name          = "flightdeck-prometheus"
 
   depends_on = [module.prometheus_operator]
 }
 
 module "federated_prometheus" {
-  count  = var.federated_prometheus_enabled ? 1 : 0
+  count  = var.prometheus_enabled ? 1 : 0
   source = "../../common/prometheus-instance"
 
   chart_values  = local.federated_prometheus_values
-  k8s_namespace = local.kube_prometheus_stack_namespace
+  k8s_namespace = kubernetes_namespace.kube_prometheus_stack[0].metadata[0].name
   name          = "federated-prometheus"
 
   depends_on = [module.prometheus_operator]
@@ -176,7 +180,6 @@ module "reloader" {
 
 locals {
   flightdeck_namespace            = kubernetes_namespace.flightdeck.metadata[0].name
-  kube_prometheus_stack_namespace = kubernetes_namespace.kube_prometheus_stack.metadata[0].name
 
   federated_prometheus_values = concat(
     [file("${path.module}/federated-prometheus.yaml")],
@@ -192,7 +195,7 @@ locals {
     yamlencode({
       prometheus = {
         port = 9090
-        url  = "http://flightdeck-prometheus.${local.kube_prometheus_stack_namespace}.svc"
+        url  = "http://flightdeck-prometheus.${kubernetes_namespace.kube_prometheus_stack[0].metadata[0].name}.svc"
       }
     })
   ]

@@ -64,7 +64,7 @@ variable "flightdeck_namespace" {
   description = "Kubernetes namespace in which flightdeck should be installed"
 }
 
-variable "federated_prometheus_enabled" {
+variable "prometheus_enabled" {
   description = "Set to false to disable the Helm chart"
   type        = bool
   default     = true
