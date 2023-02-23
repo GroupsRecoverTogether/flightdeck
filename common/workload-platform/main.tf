@@ -76,9 +76,9 @@ module "fluent_bit" {
 module "istio_ingress" {
   source = "../../common/istio-ingress"
 
-  chart_values  = var.istio_ingress_values
-  istio_version = var.istio_version
-  k8s_namespace = local.flightdeck_namespace
+  chart_values          = var.istio_ingress_values
+  istio_ingress_version = var.istio_ingress_version
+  k8s_namespace         = local.flightdeck_namespace
 }
 
 resource "kubernetes_namespace" "kube_prometheus_stack" {
