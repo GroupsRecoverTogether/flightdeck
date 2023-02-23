@@ -124,6 +124,11 @@ variable "istio_ingress_values" {
   default     = []
 }
 
+variable "istio_ingress_version" {
+  type        = string
+  description = "Version of Istio gateway to be installed"
+}
+
 variable "istio_namespace" {
   type        = string
   default     = "istio-system"
