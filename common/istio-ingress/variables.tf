@@ -22,7 +22,7 @@ variable "istio_namespace" {
   default     = "istio-system"
 }
 
-variable "istio_version" {
+variable "istio_ingress_version" {
   type        = string
   description = "Version of Istio to be installed"
 }
