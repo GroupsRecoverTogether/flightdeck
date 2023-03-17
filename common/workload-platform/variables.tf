@@ -201,18 +201,6 @@ variable "reloader_version" {
   default     = null
 }
 
-variable "secret_store_driver_values" {
-  description = "Overrides to pass to the Helm chart"
-  type        = list(string)
-  default     = []
-}
-
-variable "secret_store_driver_version" {
-  type        = string
-  description = "Version of the secret store driver to install"
-  default     = null
-}
-
 variable "vpa_enabled" {
   description = "Set to false to disable the Helm chart"
   type        = bool

@@ -142,14 +142,6 @@ module "federated_prometheus" {
   depends_on = [module.prometheus_operator]
 }
 
-module "secret_store_driver" {
-  source = "../../common/secret-store-driver"
-
-  chart_values  = var.secret_store_driver_values
-  chart_version = var.secret_store_driver_version
-  k8s_namespace = "kube-system"
-}
-
 module "metrics_server" {
   count  = var.metrics_server_enabled ? 1 : 0
   source = "../../common/metrics-server"
