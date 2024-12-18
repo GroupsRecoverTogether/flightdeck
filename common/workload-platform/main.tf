@@ -82,7 +82,7 @@ module "istio_ingress" {
 }
 
 resource "kubernetes_namespace" "kube_prometheus_stack" {
-  count  = var.prometheus_enabled ? 1 : 0
+  count = var.prometheus_enabled ? 1 : 0
   metadata {
     name = "kube-prometheus-stack"
 
@@ -170,7 +170,7 @@ module "reloader" {
 }
 
 locals {
-  flightdeck_namespace            = kubernetes_namespace.flightdeck.metadata[0].name
+  flightdeck_namespace = kubernetes_namespace.flightdeck.metadata[0].name
 
   federated_prometheus_values = concat(
     [file("${path.module}/federated-prometheus.yaml")],
