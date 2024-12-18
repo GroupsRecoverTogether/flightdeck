@@ -3,7 +3,7 @@
     "required_version": ">= 0.13.0",
     "required_providers": {
       "kubernetes": {
-        "version": "~> 2.16.0"
+        "version": "~> 2.35"
       }
     }
   }
