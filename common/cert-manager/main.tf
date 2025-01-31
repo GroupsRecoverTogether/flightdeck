@@ -20,6 +20,11 @@ locals {
       crds = {
         enabled = true
       }
+      startupapicheck = {
+        podAnnotations = {
+          "sidecar.istio.io/inject" = "false"
+        }
+      }
     })
   ]
 }
