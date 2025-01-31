@@ -17,7 +17,9 @@ locals {
           namespace = var.k8s_namespace
         }
       }
-      installCRDs = true
+      crds = {
+        enabled = true
+      }
     })
   ]
 }
